@@ -21,7 +21,7 @@ function App() {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                     <li className="nav-item">
-                    <Link className="nav-item nav-link" to="/products">All Projects</Link>
+                    <Link className="nav-item nav-link" to="/projects">All Projects</Link>
                     </li>
                   </ul>
 
