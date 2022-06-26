@@ -1,0 +1,138 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.home-hero-img{
+  background-image: url("https://images.unsplash.com/photo-1461695008884-244cb4543d74?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1631&q=80");
+  height:80vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.hero-wrapper{
+  position: absolute; 
+  right: 10%;
+  top: 30%;
+}
+.hero-text{
+  margin-bottom:20px;
+}
+
+.footer-wrapper{
+  background-color: #f4f4f4;
+  padding:2em;
+}
+
+.footer{
+  display:flex;
+  max-width: 1140px;
+  margin: 0 auto;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+.footer-header{
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+.footer-list{
+  padding:0;
+}
+
+.footer-link{
+  list-style-type: none;
+  margin-bottom: 0.7em;
+}
+.footer-link-cta{
+  color:#777777;
+}
+
+.footer-link-cta:hover{
+  color:#d6954b;
+}
+
+.footer-text{
+  color: #777777;
+}
+
+.cta{
+  border: 1px solid #d6954b;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #777777;
+  text-align: center;
+  padding: 0.5rem 1rem;
+  transition: .2s ease;
+  background:transparent;
+  height:40px;
+}
+
+.cta:hover{
+  color: #d6954b;
+  text-decoration: none;
+}
+
+/* Tablet view (inclusive of 768) */
+@media only screen and (max-width: 768px){
+  .hero-wrapper{
+    text-align: left;
+    top: 20%;
+    left: 8%
+}
+
+  .home-hero-img{
+      background-size: 250% 100%; 
+  }
+  .search-btn{
+      margin-left: 50%;
+      transform: translate(-50%);
+      margin-bottom: 10px;
+  }
+  .hero-text{
+    margin-bottom:20px;
+    color: #d6954b;
+  }
+
+}
+
+
+@media only screen and (max-width: 425px){
+  .home-hero-img{
+      background-size: 350% 100%;
+  }
+  .hero-wrapper{
+      text-align: center;
+      top: 68%;
+      left: 8%
+  }
+  .hero-text{
+    margin-bottom:20px;
+    color: white;
+  }
+
+}
