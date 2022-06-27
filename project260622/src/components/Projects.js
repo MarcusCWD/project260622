@@ -84,7 +84,6 @@ export default function Projects() {
         }
       }
       setRenderDataInfo(arrStore)
-      console.log(renderDataInfo)
     }
   }
   function clickSearch(){
