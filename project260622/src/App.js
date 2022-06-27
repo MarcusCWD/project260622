@@ -1,6 +1,6 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import React, { useState, useEffect } from "react"
+import React from "react"
 import Footer from "./components/Footer"
 import Landing from "./components/Landing";
 import Projects from "./components/Projects";

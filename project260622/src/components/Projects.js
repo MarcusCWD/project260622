@@ -8,12 +8,26 @@ import "react-widgets/styles.css";
 export default function Projects() {
     const [isLoading, setLoading] = useState(true);
     const [dataInfo, setDataInfo] = useState([]);
-    const [formState, setFormState] = useState([]);
+    const [valueState, setValueState] = useState([]);
     const tags = [];
     const [renderDataInfo, setRenderDataInfo] = useState([]);
+    const [formState, setFormState] = useState({
+      search: "",
+    });
+    const [buttonState, setButtonState] = useState(true);
+
+    const updateFormField = (e) => {
+      setFormState({
+          ...formState,
+          [e.target.name]: e.target.value,
+      })
+      if(  (e.target.value).length <= 3){
+        setRenderDataInfo(dataInfo)
+      }
+    };
+
 
   useEffect(() => {
-
     const fetchPost = async () => {
       const response = await axios.get(
         "https://wavescan-frontend-assessment.saurabhmudgal.repl.co/"
@@ -29,21 +43,24 @@ export default function Projects() {
   useEffect(() => {
     setRenderDataInfo([])
     const filterTag = () => {
-        let storeArray = []
-        for(let t of dataInfo){
-
-            // iterating the tags
-            for(let tItem of t.tags){
-                if (formState.includes(tItem) === true){
-                    tags.push(tItem)
-                }
+        if(valueState.length !== 0){
+          setFormState({search:""})
+            const filterByTag = ( list, filters ) => {
+              return list.filter( item => filters.every( filter => item.tags.includes(filter) ))
             }
+            setRenderDataInfo(filterByTag(dataInfo, valueState ))
         }
-        setRenderDataInfo(storeArray)
-      }
+        else{
+          setRenderDataInfo(dataInfo)
+        }
+    }
     filterTag()
-    console.log(renderDataInfo)
-  }, [formState]);
+  }, [valueState])
+
+  useEffect(() => {
+    setValueState([])
+    setFormState({ search: ""})
+  }, [buttonState])
 
   function toTags(){
     for(let t of dataInfo){
@@ -53,6 +70,28 @@ export default function Projects() {
             }
         }
     }
+  }
+
+  function clickFn(){
+    // upon click of the search button, use setValueState to reset all searches
+    setRenderDataInfo(dataInfo)
+    let arrStore = []
+    if ((formState.search).length >= 3){
+      for(let t of dataInfo){
+        if (((t.title).toLowerCase()).includes((formState.search).toLowerCase()) === true || ((t.description).toLowerCase()).includes((formState.search).toLowerCase()) === true){
+          arrStore.push(t)
+        }
+      }
+      setRenderDataInfo(arrStore)
+      console.log(renderDataInfo)
+    }
+  //  return  null
+  }
+  function clickSearch(){
+    setButtonState(true)
+  }
+  function clickFilter(){
+    setButtonState(false)
   }
 
   if(isLoading){
@@ -66,38 +105,59 @@ export default function Projects() {
   return (
     <React.Fragment>
         <div className="container">
-            <div>Filter</div>
+        <div className="btn-group">
+          <button className="btn btn-primary" onClick={clickSearch} >Search</button>
+          <button className="btn btn-primary" onClick={clickFilter}>Dropdown Filter</button>
+        </div>
+        {buttonState===false ?
+        <div>
+              <div className="input-group">
+                <input type="search" className="form-control rounded" placeholder="Search Type Here" aria-label="Search" aria-describedby="search-addon" value={formState.search} name="search" onChange={updateFormField}/>
+                <button type="button" className="btn btn-primary" onClick={clickFn}>search</button>
+              </div>
+          </div> : <div>{null}</div>}
+
+          {buttonState===true ?
+          <div>
             <Multiselect
             defaultValue={[]}
             data={tags}
-            onChange={formState => setFormState(formState)}
-            value={formState}
+            onChange={formState => setValueState(formState)}
+            value={valueState}
+            placeholder={"Multiselect Filter Click Here"}
             />
+          </div> : <div>{null}</div>}
+
         </div>
-        <div>{console.log(formState)}</div>
-        <div className="row g-2 p-2">
-            {renderDataInfo && renderDataInfo.map((p) => (
-                  <div className="col-md-4"> 
-                     <div className="card p-0 mb-2 mx-auto mx-md-0 nostyle">
-                        <div
-                            className="image"
-                            style={{ backgroundImage: `url(${p.img})` }}
-                        ></div>
-                        <div className="card-body">
-                            <p className="card-title nostyle" style={{height:"45px"}}>
-                            {p.title}
-                            </p>
-                            <p className="card-text">{p.description}</p>
-                            <hr/>
-                            {p.tags && p.tags.map((tag) => (
-                                <span className="badge rounded-pill bg-secondary">{tag}</span>
-                            ))}
-                        </div>
-                        
-                     </div>
-                  </div>
-                ))}
+        <div className="container">
+          <div className="row g-2 p-2">
+              {renderDataInfo && renderDataInfo.map((p) => (
+                    <div className=" col-md-6 col-lg-4"> 
+                      <div className="card p-0 mb-2 mx-auto mx-md-0 nostyle">
+                          <div
+                              className="image"
+                              style={{ backgroundImage: `url(${p.img})` }}
+                          ></div>
+                          <div className="card-body">
+                              <p className="card-title nostyle" style={{height:"45px"}}>
+                              {p.title}
+                              </p>
+                              <p className="card-text" style={{height:"45px"}}>{p.description}</p>
+                              <hr/>
+                              <p style={{height:"65px"}}>
+                              {p.tags && p.tags.map((tag) => (
+                                  <span className="badge rounded-pill bg-secondary">{tag}</span>
+                              ))}
+                              </p>
+
+                          </div>
+                          
+                      </div>
+                    </div>
+                  ))}
             </div>
+        </div>
+     
     </React.Fragment>
   );
 }
