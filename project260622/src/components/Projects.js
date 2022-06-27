@@ -3,7 +3,8 @@ import axios from "axios";
 import "../App.css";
 import Multiselect from "react-widgets/Multiselect";
 import "react-widgets/styles.css";
-
+// import LoadingSpinner from "./LoadingSpinner";
+import "../spinner.css";
 
 export default function Projects() {
     const [isLoading, setLoading] = useState(true);
@@ -85,7 +86,6 @@ export default function Projects() {
       setRenderDataInfo(arrStore)
       console.log(renderDataInfo)
     }
-  //  return  null
   }
   function clickSearch(){
     setButtonState(true)
@@ -94,30 +94,32 @@ export default function Projects() {
     setButtonState(false)
   }
 
-  if(isLoading){
-    console.log("isloading")
-    // this is a good place to do the SVG animation for the running wheel
-  }
-  else{
+  if(!isLoading){
     toTags()
   }
 
   return (
     <React.Fragment>
-        <div className="container">
-        <div className="btn-group">
-          <button className="btn btn-primary" onClick={clickSearch} >Search</button>
-          <button className="btn btn-primary" onClick={clickFilter}>Dropdown Filter</button>
+        {isLoading ?    
+        <div className="spinner-container">
+          <div className="loading-spinner">
         </div>
-        {buttonState===false ?
+        </div>  : <div>{null}</div>}
+
+        <div className="container p-4">
+        <div className="btn-group nav-pills ">
+          <div className="btn nav-link" onClick={clickSearch} >Search</div>
+          <div className="btn nav-link" onClick={clickFilter}>Dropdown Filter</div>
+        </div>
+        {buttonState===true ?
         <div>
               <div className="input-group">
                 <input type="search" className="form-control rounded" placeholder="Search Type Here" aria-label="Search" aria-describedby="search-addon" value={formState.search} name="search" onChange={updateFormField}/>
-                <button type="button" className="btn btn-primary" onClick={clickFn}>search</button>
+                <button type="button" className="btn searchbtn" onClick={clickFn}>search</button>
               </div>
           </div> : <div>{null}</div>}
 
-          {buttonState===true ?
+          {buttonState===false ?
           <div>
             <Multiselect
             defaultValue={[]}

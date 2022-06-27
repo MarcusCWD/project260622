@@ -109,6 +109,32 @@
   text-decoration: inherit;
   color: inherit;
 }
+.nav-link{
+  border: 1px solid #d6954b;
+  letter-spacing: 2px;
+  color: #777777;
+  text-align: center;
+  padding: 0.5rem 1rem;
+  transition: .2s ease;
+  background:#f2cb9f;
+  height:40px;
+}
+
+.nav-pills .nav-link.active  {
+  background-color: #FFFCF7;
+  color: black;
+}
+
+.searchbtn{
+  border: 1px solid #d6954b;
+  letter-spacing: 2px;
+  color: #535353;
+  text-align: center;
+  padding: 0.5rem 1rem;
+  transition: .2s ease;
+  background:#df943e;
+  height:40px;
+}
 
 /* Tablet view (inclusive of 768) */
 @media only screen and (max-width: 768px){
