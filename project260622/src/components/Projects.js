@@ -108,7 +108,7 @@ export default function Projects() {
 
         <div className="container p-4">
         <div className="btn-group nav-pills ">
-          <div className="btn nav-link" onClick={clickSearch} >Search</div>
+          <div className="btn nav-link " onClick={clickSearch} >Search</div>
           <div className="btn nav-link" onClick={clickFilter}>Dropdown Filter</div>
         </div>
         {buttonState===true ?
