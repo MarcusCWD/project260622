@@ -1,4 +1,4 @@
-# Construction.
+# Construction Application
 <img src='project260622/public/images/construction.png' style='display:block'><br>
 
 Access the live demo of the website [here](https://project260622.netlify.app/).
@@ -14,7 +14,7 @@ Access the live demo of the website [here](https://project260622.netlify.app/).
 
 2. **Multiselect Filter dropdown** This feature is used to narrow down the search results for the user. User can search for projects by the tags by clicking the respective options at the filter input.
 
-3. **Search feature** The user is able to search by name and/or by the season's name. The search bar is placed in the navigation for quick access.
+3. **Search feature** The user is able to search by title and/or by the description. The search bar is placed in the navigation for quick access.
 
 
 ## Technologies Used
